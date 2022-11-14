@@ -30,7 +30,6 @@ class Usuario{
     
     addMascota(Mascota){
         this.mascotas.push(Mascota)
-        return this.mascotas
     }
 
     countMascotas(){
@@ -39,7 +38,6 @@ class Usuario{
 
     addBook(Nombre, Autor){
         this.libros.push({nombre:Nombre,autor:Autor})
-        return this.libros
     }
 
     getBookNames(){
@@ -50,10 +48,9 @@ class Usuario{
 
 const mt=new Usuario('Marcia', 'Torres', [{nombre:'El envio', autor: 'SF'}, {nombre:'La sombra', autor: 'JK'}], ['perro'])
 
-console.log(mt)
-console.log(mt.nombre)
 console.log(mt.getFullName())
-console.log(mt.addMascota('gato'))
+mt.addMascota('gato')
 console.log(mt.countMascotas())
-console.log(mt.addBook('Harry Potter', 'JKRowling'))
+mt.addBook('Harry Potter', 'JKRowling')
 console.log(mt.getBookNames())
+
