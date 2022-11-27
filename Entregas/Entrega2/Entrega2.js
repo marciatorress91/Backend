@@ -13,7 +13,7 @@ class Contenedor {
         this.file=file
     }
 
-    writeFile=async data => {
+    async writeFile (data){
         try {
             await fs.promises.writeFile(
                 this.file, JSON.stringify(data, null, 2)
@@ -23,7 +23,7 @@ class Contenedor {
         }
     }
 
-    getAll=async() => {
+    async getAll (){
         try {
             let objs = await fs.promises.readFile(this.file, 'utf-8')
             return JSON.parse(objs)
@@ -33,7 +33,7 @@ class Contenedor {
         }
     }
 
-    save = async obj => {
+    async save (obj){
 		let objs = await this.getAll();
 		try {
 			let newId;
@@ -49,7 +49,7 @@ class Contenedor {
 		}
 	};
 
-    getById=async id => {
+    async getById (id){
         let objs = await this.getAll()
         try {
             const obj = objs.find(obj=> obj.id===id)
@@ -59,7 +59,7 @@ class Contenedor {
         }
     }
 
-    deleteById=async id => {
+    async deleteById (id){
         let objs=await this.getAll()
         try {
             objs=objs.filter(obj => obj.id != id)
@@ -69,7 +69,7 @@ class Contenedor {
         }
     }
 
-    deleteAll=async() =>  {
+    async deleteAll (){
         await this.writeFile([])
     }
 

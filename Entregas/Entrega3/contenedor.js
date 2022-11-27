@@ -1,11 +1,3 @@
-/* Implementar programa que contenga una clase llamada Contenedor que reciba el nombre del archivo con el que va a trabajar e implemente los siguientes métodos:
-
-save(Object): Number - Recibe un objeto, lo guarda en el archivo, devuelve el id asignado.
-getById(Number): Object - Recibe un id y devuelve el objeto con ese id, o null si no está.
-getAll(): Object[] - Devuelve un array con los objetos presentes en el archivo.
-deleteById(Number): void - Elimina del archivo el objeto con el id buscado.
-deleteAll(): void - Elimina todos los objetos presentes en el archivo. */
-
 const fs= require ('fs')
 
 class Contenedor {
@@ -13,7 +5,7 @@ class Contenedor {
         this.file=file
     }
 
-    writeFile=async data => {
+    async writeFile (data){
         try {
             await fs.promises.writeFile(
                 this.file, JSON.stringify(data, null, 2)
@@ -23,7 +15,7 @@ class Contenedor {
         }
     }
 
-    getAll=async() => {
+    async getAll (){
         try {
             let objs = await fs.promises.readFile(this.file, 'utf-8')
             return JSON.parse(objs)
@@ -33,7 +25,7 @@ class Contenedor {
         }
     }
 
-    save = async obj => {
+    async save (obj){
 		let objs = await this.getAll();
 		try {
 			let newId;
@@ -49,7 +41,7 @@ class Contenedor {
 		}
 	};
 
-    getById=async id => {
+    async getById (id){
         let objs = await this.getAll()
         try {
             const obj = objs.find(obj=> obj.id===id)
@@ -59,7 +51,7 @@ class Contenedor {
         }
     }
 
-    deleteById=async id => {
+    async deleteById (id){
         let objs=await this.getAll()
         try {
             objs=objs.filter(obj => obj.id != id)
@@ -69,11 +61,10 @@ class Contenedor {
         }
     }
 
-    deleteAll=async() =>  {
+    async deleteAll (){
         await this.writeFile([])
     }
 
 }
 
 module.exports = Contenedor
-

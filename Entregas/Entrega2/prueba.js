@@ -8,14 +8,14 @@ const prueba = async() => {
         thumbnail: 'http:fotoproducto1',
     })
     let getAll=await products.getAll()
-    let getById=await products.getById(6)
+    let getById=await products.getById(1)
     // let deleteById=await products.deleteById(1)
-    // let deleteAll=await products.deleteAll()
+    let deleteAll=await products.deleteAll()
     console.log(save)
     console.log(getAll)
     console.log(getById)
     // console.log(deleteById)
-    // console.log(deleteAll)
+    console.log(deleteAll)
 }
 
 prueba()
