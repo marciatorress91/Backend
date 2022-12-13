@@ -18,8 +18,8 @@ Las respuestas del servidor serán en formato JSON. La funcionalidad será proba
 
 
 const express = require('express');
-const router = require('express').Router();
-const { Producto, productos } = require('./claseProducto');
+const router = require("./routes/router");
+
 
 const PORT = 8080;
 const app = express();
@@ -28,60 +28,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-
-
-router.get('/productos', (req, res) => {
-	res.json({ productos });
-});
-
-router.get('/productos/:id', (req, res) => {
-	let producto = productos.find(
-		producto => producto.id === Number(req.params.id)
-	);
-	if (producto) {
-		res.send(producto);
-	} else {
-		res.status(404).send({ error: 'Producto no encontrado' });
-	}
-});
-
-router.post('/productos', (req, res) => {
-	let { title, price, thumbnail } = req.body;
-	const producto = { title, price, thumbnail };
-	producto.id = productos.length + 1;
-	productos.push(producto);
-	res.send(producto);
-});
-
-router.put('/productos/:id', (req, res) => {
-	let { title, price, thumbnail } = req.body;
-	let index = productos.findIndex(
-		producto => producto.id === Number(req.params.id)
-	);
-	if (index >= 0) {
-		productos[index] = { title, price, thumbnail };
-		productos[index].id = Number(req.params.id);
-		res.send(productos[index]);
-	} else {
-		res.status(404).send({ error: 'Producto no encontrado' });
-	}
-});
-
-router.delete('/productos/:id', (req, res) => {
-	let index = productos.findIndex(
-		producto => producto.id === Number(req.params.id)
-	);
-	if (index >= 0) {
-		productos.splice(index, 1);
-		res.send({ message: 'Producto eliminado' });
-	} else {
-		res.status(404).send({ error: 'Producto no encontrado' });
-	}
-});
-
 app.use('/api', router);
 
 const server = app.listen(PORT, () =>
 	console.log(`Server running on port ${PORT}`)
 );
 server.on('error', err => console.log(`Error: ${err}`));
+
+
+
+
