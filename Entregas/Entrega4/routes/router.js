@@ -2,6 +2,10 @@ const express = require('express');
 const router = require('express').Router();
 const { Producto, productos } = require('../claseProducto');
 
+const { v4: uuidv4 } = require('uuid');
+
+
+
 
 router.get('/productos', (req, res) => {
 	res.json({ productos });
@@ -31,7 +35,7 @@ router.post('/productos', (req, res) => {
         return res.send("Debe agregar un link de imagen")
     }
 	const producto = { title, price, thumbnail };
-	producto.id = productos.length + 1;
+	producto.id = uuidv4();
 	productos.push(producto);
 	res.send(producto);
 });
@@ -63,7 +67,7 @@ router.put('/productos/:id', (req, res) => {
 
 router.delete('/productos/:id', (req, res) => {
 	let index = productos.findIndex(
-		producto => producto.id === Number(req.params.id)
+		producto => producto.id === (req.params.id)
 	);
 	if (index >= 0) {
 		productos.splice(index, 1);
