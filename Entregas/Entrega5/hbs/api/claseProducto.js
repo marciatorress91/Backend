@@ -45,7 +45,6 @@ class Producto {
 
     modifyById(prod,id){
         const productIsOk=this.validateProduct(prod)
-    exit
         if(productIsOk){
             let index = this.productList.findIndex(
                 producto => producto.id === id
@@ -76,5 +75,5 @@ class Producto {
 
 }
 
-
-module.exports=Producto
+const productos=new Producto()
+module.exports=productos

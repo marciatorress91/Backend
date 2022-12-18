@@ -1,7 +1,7 @@
 const express = require('express');
 const router = require('express').Router();
-const ProductClass = require('../api/claseProducto');
-const products=new ProductClass('../data/products.txt')
+const products = require('../api/claseProducto');
+
 
 
 router.get("/productos", (req,res)=>{
@@ -27,7 +27,7 @@ router.put("/productos/:id", (req, res)=>{
 
 router.delete("/productos/:id", (req, res)=>{
     const id=(req.params.id)
-    res.json(producs.deleteById(id))
+    res.json(products.deleteById(id))
 })
 
 

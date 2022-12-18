@@ -1,0 +1,25 @@
+<%- include('./header.ejs') %>
+<section class='p-4 bg-secondary container'>
+  <h2 class='alert alert-dark text-center'>Ingrese Producto</h2>
+
+  <form class="" action="/api/productos" method="POST" >
+     <div class="mb-3">
+       <label for="name" class="form-label fw-bold">Nombre</label>
+       <input type="text" class="form-control" id="name" name="title">
+     </div>
+     <div class="mb-3">
+       <label for="price" class="form-label fw-bold">Precio</label>
+       <input type="number" class="form-control" id="price" name="price">
+     </div>
+     <div class="mb-3">
+       <label for="picture" class="form-label fw-bold">Foto URL</label>
+       <input type="text" class="form-control" id="picture" name="thumbnail" aria-describedby="pictureHelp">
+     </div>
+     <div class="mb-3">
+      <input type="submit" class="btn btn-info" value='Enviar'/>
+     </div>
+   </form>
+</section>
+
+  </body>
+  </html>

@@ -10,29 +10,25 @@ c)Ambas páginas contarán con un botón que redirija a la otra.
  */
 const express = require('express');
 const router = require("./routes/router");
-const handlebars = require('express-handlebars')
-const ProductClass = require('./api/claseProducto');
-const products =new ProductClass ('.data/products.txt')
+const path=require ("path")
+const {engine}=require("express-handlebars")
+
+const products = require('./api/claseProducto');
+
 
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
+
 
 app.use('/api', router);
 
-app.engine(
-    "hbs",
-    handlebars.engine({
-        extname: ".hbs",
-        defaultLayout: 'main.hbs',
-    })
-)
+app.engine("handlebars", engine())
 
-app.set("view engine", "hbs");
-app.set("views", "./views");
+app.set("view engine", "handlebars");
+app.set("views", path.resolve(__dirname, "./views"));
 
 
 
@@ -49,9 +45,7 @@ app.get('/productos', (req, res) => {
 
 
 const PORT = 8080;
-const server = app.listen(PORT, () =>
-	console.log(`Server running on port ${PORT}`)
-);
+const server = app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 server.on('error', err => console.log(`Error: ${err}`));
 
 

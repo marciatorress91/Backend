@@ -1,0 +1,33 @@
+<%- include('./header.ejs') %>
+
+<section class="container p-4 bg-secondary">
+  <h2 class='alert alert-dark text-center'>Productos</h2>
+
+<% if( productos.length === 0 ) { %>
+  <h2 class='alert alert-info container'>No se encontraron productos</h2>
+<% } else { %>
+<table class="table container">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Foto</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% productos.forEach((item, index) => { %>
+    <tr>
+      <th scope="row"><%= index + 1 %></th>
+      <td><%= item.title %></td>
+      <td><%= item.price %></td>
+      <td><img src=<%= item.thumbnail %> style="max-width: 50px; height: auto;"</td>
+    </tr>
+    <% }) %>
+    
+</table>
+<% } %>
+</section>
+
+</body>
+</html>
