@@ -13,7 +13,7 @@ router.get('/productos', (req, res) => {
 
 router.get('/productos/:id', (req, res) => {
 	let producto = productos.find(
-		producto => producto.id === Number(req.params.id)
+		producto => producto.id === (req.params.id)
 	);
 	if (producto) {
 		res.send(producto);
