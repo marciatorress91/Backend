@@ -25,8 +25,8 @@ const router = require("./routes/router");
 
 const path = require ("path")
 
-const products = require('./api/claseProducto');
-const chat = require('./api/claseProducto');
+const {products,chat}= require('./api/claseProducto');
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -64,6 +64,7 @@ socket.on('newMsj', mensaje => {
 
 
   app.use('/api', router);
+  
 
   
   app.set("view engine", "ejs");
@@ -77,7 +78,8 @@ socket.on('newMsj', mensaje => {
 
 
 const PORT = 8080;
-const server = app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+const server = httpServer.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 server.on('error', err => console.log(`Error: ${err}`));
+
 
 

@@ -75,7 +75,7 @@ class Producto {
 
 }
 
-const productos=new Producto()
-const chat = new Producto()
+const products=new Producto()
+const chat=new Producto()
 
-module.exports = productos, chat
+module.exports = {products,chat}
