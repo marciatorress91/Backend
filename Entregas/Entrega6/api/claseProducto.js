@@ -24,7 +24,7 @@ class Producto {
     addProduct(producto){
         const productIsOk=this.validateProduct(producto)
 
-        if(productIsOk){
+        if(true){
             producto.id = uuidv4();
 	        this.productList.push(producto);
         

@@ -23,10 +23,10 @@ const io = new Socket(httpServer)
 
 const router = require("./routes/router");
 
+
 const path = require ("path")
 
 const {products,chat}= require('./api/claseProducto');
-
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -45,6 +45,7 @@ socket.emit('productos', products.getAllProducts())
 socket.on('update', producto => {
     products.addProduct( producto )
     io.sockets.emit('productos', products.getAllProducts())
+    console.log(products.getAllProducts())
       
 })
 

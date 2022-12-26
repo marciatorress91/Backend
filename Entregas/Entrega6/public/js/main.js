@@ -99,7 +99,8 @@ socket.on('mensajes', data => {
     </div>
     `
   })
-  document.querySelector('#chat').innerHTML = htmlChatToRender
+  document.getElementById('chatt').innerHTML = htmlChatToRender
+  
 })
 
 
