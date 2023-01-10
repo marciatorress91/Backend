@@ -14,13 +14,15 @@ function validarAdmin (req,res,next){
 }
 
 
-routerProduct.get("/", (req,res)=>{
-    res.json(products.getAllProducts())
+routerProduct.get("/", async (req,res)=>{
+    const allProducts=await products.getAllProducts()
+    res.json(allProducts)
 })
 
-routerProduct.get("/:id", (req, res) => {
+routerProduct.get("/:id", async(req, res) => {
     const id=(req.params.id)
-    res.json(products.getById(id))
+    const product=await products.getById(id)
+    res.json(product)
     
 });
 
@@ -29,15 +31,17 @@ routerProduct.post("/", validarAdmin, (req,res)=>{
     res.json(result)
 })
     
-routerProduct.put("/:id", validarAdmin, (req, res)=>{
+routerProduct.put("/:id", validarAdmin, async (req, res)=>{
     const id=(req.params.id)
     const prod = req.body
-    res.json(products.modifyById(prod,id))
+    const product=await products.modifyById(prod,id)
+    res.json(product)
 })
     
-routerProduct.delete("/:id", validarAdmin, (req, res)=>{
+routerProduct.delete("/:id", validarAdmin, async (req, res)=>{
     const id=(req.params.id)
-    res.json(products.deleteById(id))
+    const borrado= await products.deleteById(id)
+    res.json(borrado)
 })
  
 

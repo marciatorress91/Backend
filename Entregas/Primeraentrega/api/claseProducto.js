@@ -1,16 +1,26 @@
 const { v4: uuidv4 } = require('uuid');
+const fs = require ('fs');
+
 
 class Producto {
-    constructor(){
-        this.productList=[]
+    constructor( file ){
+        this.productList=file
     }
 
-    getAllProducts(){
-        return this.productList
+    async saveFile ( productos ) {
+        await fs.promises.writeFile(
+            this.productList, JSON.stringify( productos, null, 2 )
+        )
+      }
+
+    async getAllProducts(){
+        const allProducts = await fs.promises.readFile( this.productList, 'utf-8')
+        return JSON.parse(allProducts)
     }
 
-    getById(id){
-        const producto=this.productList.find(
+    async getById(id){
+        const allProducts = await this.getAllProducts()
+        const producto=allProducts.find(
             producto => producto.id === id
         );
         if(producto){
@@ -21,14 +31,15 @@ class Producto {
     }
 
     
-    addProduct(producto){
+    async addProduct(producto){
         const productIsOk=this.validateProduct(producto)
 
         if(productIsOk){
             producto.timestamp= new Date().toLocaleDateString()
             producto.id = uuidv4();
-            this.productList.push(producto);
-                    
+            const allProducts = await this.getAllProducts()
+            allProducts.push(producto)
+            await this.saveFile (allProducts)                    
             return producto
         } else{
             return ("colocar valores validos")
@@ -36,26 +47,27 @@ class Producto {
     }
 
 
-
     validateProduct(product){
-        const { nombre, descripcion, codigo, foto, precio, stock } = product;
+       const { nombre, descripcion, codigo, foto, precio, stock } = product;
 
-        if(!nombre|| !descripcion || !codigo || !foto || !precio || !stock){
-            return false
-        }
+       if(!nombre|| !descripcion || !codigo || !foto || !precio || !stock){
+           return false
+       }
         return true
     }
 
-    modifyById(prod,id){
+    async modifyById(prod,id){
         const productIsOk=this.validateProduct(prod)
         if(productIsOk){
-            let index = this.productList.findIndex(
+            const allProducts = await this.getAllProducts()
+            let index = allProducts.findIndex(
                 producto => producto.id === id
             );
             if (index >= 0) {
-                this.productList[index] = prod;
-                this.productList[index].id = id;
-                return (this.productList[index]);
+                allProducts[index] = prod;
+                allProducts[index].id = id;
+                await this.saveFile (allProducts); 
+                return (allProducts[index]);
             } else {
                 return ('Producto no encontrado');
             }
@@ -64,12 +76,14 @@ class Producto {
         }
     }
 
-    deleteById(id){
-        const index = this.productList.findIndex(
+    async deleteById(id){
+        const allProducts = await this.getAllProducts()
+        const index = allProducts.findIndex(
             producto => producto.id === id
         )
         if (index >= 0) {
-            this.productList.splice(index, 1);
+            allProducts.splice(index, 1);
+            await this.saveFile (allProducts); 
             return ('Producto eliminado');
         } else {
             return ('Producto no encontrado');
@@ -78,7 +92,7 @@ class Producto {
 
 }
 
-const productos=new Producto()
+const productos=new Producto('./api/productos.txt')
 
 
 module.exports = productos

@@ -2,62 +2,47 @@ const { v4: uuidv4 } = require('uuid');
 
 class Carrito {
     constructor(){
-        this.carro=[]
-    }
-
-    getAll(){
-        return this.carro
-    }
-
-    getById(id){
-        const carrito=this.carro.find(
-            carrito => carrito.id === id
-        );
-        if(carrito){
-            return carrito
-        } else{
-            return ("Carrito no encontrado")
-        }    
-    }
-
-    
-    add(carrito){
-            carrito.timestamp= new Date().toLocaleDateString()
-            carrito.id = uuidv4();
-            this.carro.push(carrito);
-            return carrito
-       
-    }
-
-    modifyById(obj,id){
-            let index = this.carro.findIndex(
-                carrito => carrito.id === id
-            );
-            if (index >= 0) {
-                this.carro[index] = obj;
-                this.carro[index].id = id;
-                return (this.carro[index]);
-            } else {
-                return ('Carrito no encontrado');
-            }
+        this.id=uuidv4()
+        this.timesramp=new Date().toLocaleDateString()
+        this.productos=[]
     }
 
 
-    deleteById(id){
-        const index = this.carro.findIndex(
-            carrito => carrito.id === id
-        )
+    getProduct(id){
+        const index = this.productos.findIndex((product) => product.id === id);
+
         if (index >= 0) {
-            this.carro.splice(index, 1);
-            return ('Carrito eliminado');
-        } else {
-            return ('Carrito no encontrado');
+          const producto = this.productos[index];
+          return producto;
         }
+        return `Producto con id ${id} no encontrado`;
+    }   
+    
+
+    modifyProduct(id,obj){
+        const index=this.productos.findIndex((product)=>product.id===id)
+        if (index !==0) return `No se encontro el producto con id ${id}`
+
+        this.productos[index]=obj
+        return this.productos[index]
     }
 
+    addProduct(idProducto){
+        this.productos.push(idProducto)
+    }
+
+    deleteProduct(idProducto){
+        const index = this.productos.findIndex((product) => product === idProducto)
+        
+        if (index >= 0) {
+            this.productos.splice(index, 1);
+            return ` ${idProducto} `;
+        } else {
+            return `Producto no encontrado`;
+        }
+
+        
+    }
 }
 
-
-const carrito=new Carrito()
-
-module.exports = carrito
+module.exports = Carrito

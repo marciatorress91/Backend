@@ -21,6 +21,7 @@ function createCarrito() {
   return c.id;
 }
 
+
 function modifyById(obj, idCarrito, idProducto) {
   let index = carritos.findIndex((carrito) => carrito.id === idCarrito);
   if (index >= 0) {
@@ -30,7 +31,7 @@ function modifyById(obj, idCarrito, idProducto) {
   }
 }
 
-// Misma lógica que el modify. Primero encuentro el carrito de mi variable carritos de este mismo archivo. Me va a devolver una instancia de mi objeto carrito y luego llamo al método definido
+
 function deleteById(id) {
   const index = carritos.findIndex((carrito) => carrito.id === id);
   if (index >= 0) {
@@ -45,9 +46,9 @@ function addProduct(idProducto, idCarrito) {
   const index = carritos.findIndex((carrito) => carrito.id === idCarrito);
   if (index >= 0) {
     carritos[index].addProduct(idProducto);
-    return `Carrito eliminado con id ${id}`;
+    return `Producto agregado al carrito con id ${idCarrito}`;
   } else {
-    return `Carrito no encontrado con id ${id}`;
+    return `Carrito con id ${idCarrito} no encontrado`;
   }
 }
 
@@ -55,18 +56,25 @@ function getProductById(idCarrito, idProducto) {
   const index = carritos.findIndex((carrito) => carrito.id === idCarrito);
 
   if (index >= 0) {
-    const producto = carritos[index].getProductById(idProducto);
+    const producto = carritos[index].getProduct(idProducto);
     return producto;
   }
-
-  return "Carrito no encontrado";
+  return `Carrito con id ${idCarrito} no encontrado`;
 }
+
 
 function deleteProductById(idProducto, idCarrito) {
-  //Aca implementar código para encontrar el carrito que se le pasa por id y llamar al método que le corresponde.
+  
+  const index = carritos.findIndex((carrito) => carrito.id === idCarrito);
+
+  if (index >= 0) {
+    const result = carritos[index].deleteProduct(idProducto);
+    return `Se elimino el producto ${result}`;
+  }
+  return `Carrito con id ${idCarrito} no encontrado`;
 }
 
-//Vamos a exportar todas las funciones creadas. Todas van a controlar a los carritos, por ende, desde el router solo vamos a llamar a estas funciones y dejamos que la magia suceda por detrás.
+
 module.exports = {
   getAll,
   getById,
@@ -74,6 +82,7 @@ module.exports = {
   modifyById,
   createCarrito,
   addProduct,
+  getProductById,
+  deleteProductById
 };
 
-// En este archivo va a estar toda la lógica pesada y va a controlar cada carrito que se cree. Lo mismo esta para aplicar para los productos. Tener un archivo productControllers y dividir lógicas.

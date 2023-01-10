@@ -1,0 +1,32 @@
+[
+  {
+    "nombre": "1",
+    "descripcion": "1",
+    "codigo": "1",
+    "foto": "1",
+    "precio": "1",
+    "stock": "1",
+    "timestamp": "1/10/2023",
+    "id": "e10f78a9-3a08-4ad0-b647-918f88d4c00a"
+  },
+  {
+    "nombre": "2",
+    "descripcion": "2",
+    "codigo": "2",
+    "foto": "2",
+    "precio": "2",
+    "stock": "2",
+    "timestamp": "1/10/2023",
+    "id": "46b46ec8-e795-4919-aaf8-43311c3bd524"
+  },
+  {
+    "nombre": "3",
+    "descripcion": "3",
+    "codigo": "3",
+    "foto": "3",
+    "precio": "3",
+    "stock": "3",
+    "timestamp": "1/10/2023",
+    "id": "f3635aa1-68c4-4178-846f-e7ed4e30e4fc"
+  }
+]
