@@ -1,0 +1,19 @@
+{
+    "nombre": "1",
+    "descripcion": "1",
+    "codigo": "1",
+    "foto": "1",
+    "precio": "1",
+    "stock": "1",
+    "timestamp": "1/9/2023",
+    "id": "17c7476d-61ab-4abd-9b12-0cfc3f1aabeb"
+}
+
+
+[
+    {
+        "id": "420395d9-edaf-42c1-9a08-42a2179e8521",
+        "timesramp": "1/9/2023",
+        "productos": []
+    }
+]
