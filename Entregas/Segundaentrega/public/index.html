@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="publicport" content="width=device-width, initial-scale=1.0">
+  <title>Segunda entrega - proyecto final</title>
+
+  <link rel="stylesheet" type="text/css" href="css/styles.css" media="screen" />
+
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+  <!-- JavaScript Bundle with Popper -->
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/templates.js"></script>
+  <script defer src="js/main.js"></script>
+
+</head>
+
+<body>
+  <ul class="nav container" style="justify-content:space-around">
+    <li class="nav-item"> 
+      <a class="btn btn-info" href="/">INICIO</a>
+    </li>
+    <li class="nav-item">
+      <a class="btn btn-info" href=#tablaProd >PRODUCTOS</a>
+    </li>
+  </ul>
+  <section class="p-4 bg-secondary container">
+  <div id="soloAdministrador"></div>
+ 
+  <br>
+
+  <div class="p-4 container">
+    <div class="alert alert-dark text-center" role="alert">
+      MODIFICACION DE PRODUCTO
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row mb-3" style="padding-left: 1.5rem; padding-right: 1.5rem;">
+      <label for="idm" class="form-label fw-bold">Id del producto</label>
+      <input type="text" class="col form-control" id="idm" name="id">
+      <button id="idProdToModifyBtn" type="" class="col mx-1 btn btn-info">Confirmar id de producto a modificar</button>
+    </div>   
+  </div>
+
+
+
+
+
+  <form id= "formulario" class="container p-4" action="/api/productos" method="" >
+     <div class="mb-3">
+       <label for="namem" class="form-label fw-bold">Nombre</label>
+       <input type="text" class="form-control" id="namem" name="title">
+     </div>
+     <div class="mb-3">
+        <label for="descriptionm" class="form-label fw-bold">Descripcion</label>
+        <input type="text" class="form-control" id="descriptionm" name="title">
+      </div>
+      <div class="row d-flex justify-content-center">
+        <div class="mb-3 col">
+            <label for="codem" class="form-label fw-bold">Codigo</label>
+            <input type="number" class="form-control" id="codem" name="codem">
+        </div>   
+        <div class="mb-3 col">
+            <label for="pricem" class="form-label fw-bold">Precio</label>
+            <input type="number" class="form-control" id="pricem" name="pricem">
+        </div>
+        <div class="mb-3 col">
+            <label for="stockm" class="form-label fw-bold">Stock</label>
+            <input type="number" class="form-control" id="stockm" name="price">
+        </div>
+     </div>
+     <div class="mb-3">
+       <label for="picturem" class="form-label fw-bold">Foto</label>
+       <input type="text" class="form-control" id="picturem" name="thumbnailm" aria-describedby="pictureHelp">
+       <div id="pictureHelp" class="form-text" style="color:white">URL de la foto</div>
+     </div>
+     <button id="modifyOkBtn" type="submit" class="btn btn-info">Guardar</button>
+   </form>
+
+   <br>
+   <br id="tablaProd">
+   
+   <div class="container p-4">
+    <div class="alert alert-dark text-center" role="alert">
+      PRODUCTOS
+    </div>
+  </div>
+  <div class="container">
+    <div class="row d-flex justify-content-center" id="productos"></div>
+  </div>
+  
+  <br>
+  <div class="container p-4">
+    <div class="alert alert-dark text-center" role="alert">
+      CARRITOS
+    </div>
+  </div>
+  
+  <div class="container p-4">
+    <div class="row d-flex justify-content-center" id="carritos"></div>
+  </div>
+
+
+  <br>
+ 
+  <div class="container p-4">
+    <div class="alert alert-dark text-center" role="alert">
+      OPERACIONES CON CARRITOS
+    </div>
+  </div>
+
+  <div class="container p-4">
+
+    <div id= "" class="row d-flex justify-content-center">
+      <div class="col">
+        <button id="newCartBtn" type="" class="btn btn-info">Nuevo carrito</button> 
+      </div>
+    </div>
+    
+    <br>
+
+    <div id= "" class="row d-flex justify-content-center">
+      <div class="col">      
+        <input type="text" class="form-control" id="idProdNew" aria-describedby="pHelp3">
+        <div id="pHelp3" class="form-text" style="color:white">ID producto a agregar</div>
+      </div>
+      <div class="col">      
+        <input type="text" class="form-control" id="idProdCartNew" aria-describedby="pHelp4">
+        <div id="pHelp4" class="form-text" style="color:white">ID del carrito</div>
+      </div>
+      <div class="col">
+        <button id="newItemCartBtn" type="" class="btn btn-info">Agregar producto</button> 
+      </div>
+    </div>
+
+    <br>
+
+    <div id= "" class="row d-flex justify-content-center">
+      <div class="col">      
+        <input type="text" class="form-control" id="idCartList" aria-describedby="pHelp4">
+        <div id="pHelp4" class="form-text" style="color:white">ID del carrito</div>
+      </div>
+      <div class="col">
+        <button id="listItemCartBtn" type="" class="btn btn-info">Ver productos del carrito</button> 
+      </div>
+    </div>
+    <div id="itemCartList" class="row"></div>
+
+    <br>
+
+    <div id= "" class="row d-flex justify-content-center ">
+      <div class="col">      
+        <input type="text" class="form-control" id="idCartDel" aria-describedby="pHelp">
+        <div id="pHelp" class="form-text" style="color:white">ID de carrito a borrar</div>
+      </div>
+      <div class="col">
+        <button id="deleteCartBtn" type="" class="btn btn-info">Borrar carrito</button> 
+      </div>
+    </div>
+    
+    <br>
+
+    <div id= "" class="row d-flex justify-content-center ">
+      <div class="col">      
+        <input type="text" class="form-control" id="idProdDel" aria-describedby="pHelp1">
+        <div id="pHelp1" class="form-text" style="color:white">ID producto a borrar</div>
+      </div>
+      <div class="col">      
+        <input type="text" class="form-control" id="idProdCartDel" aria-describedby="pHelp2">
+        <div id="pHelp2" class="form-text" style="color:white">ID del carrito</div>
+      </div>
+      <div class="col">
+        <button id="deleteItemCartBtn" type="" class="btn btn-info">Borrar producto</button> 
+      </div>
+    </div>
+
+
+
+  </div>
+</section>
+</body>
+</html>

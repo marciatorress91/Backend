@@ -1,7 +1,7 @@
 // Se ejecuta manualmente para crear las tablas
 
 
-const { sqlite3Db } = require('./config/connectToDb')
+/* const { sqlite3Db } = require('./config/connectToDb')
 const { createTableSqlite } = require("./model/sqlite3model")
 
 const executeOperations = async () => {
@@ -14,7 +14,7 @@ const executeOperations = async () => {
   }
 }
 
-executeOperations()
+executeOperations() */
 
 
 /* const { mariaDb } = require('./config/connectToDb')
